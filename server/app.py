@@ -5,7 +5,9 @@ import redis
 from flask import Flask, render_template, request
 
 redis_client = redis.StrictRedis(host=os.environ.get("REDIS_HOST"), port=6379, db=0)
-char_limit = 15
+char_limit = (
+    27  # alpha + 1. This need to be changed in worker/upside_down_display.py too.
+)
 
 if os.getenv("FLASK_ENV") == "development":
 

@@ -13,7 +13,7 @@ class UpsideDownDisplay:
 
     def __init__(self, num_leds=100):
         self.num_leds = num_leds
-        self.char_limit = 15
+        self.char_limit = 27
         self.data_pin = board.D18
         self.character_delay = 0.0  # how long to wait between characters
         self.character_time = 1.0  # how long to display characters for
