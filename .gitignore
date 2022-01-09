@@ -3,3 +3,4 @@
 **/environment.sh
 **/secret.yaml
 *.pyc
+*.swp
