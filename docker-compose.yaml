@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3.5"
 services:
   redis:
     image: redis
@@ -12,6 +12,8 @@ services:
       - "redis"
     ports:
       - "5000:5000"
+    volumes:
+      - "./server:/code"
   worker:
     build: worker
     image: upside-down-worker
@@ -19,3 +21,5 @@ services:
     environment:
       - SERVER_HOST=server:5000
       - SERVER_KEY=hunter2
+    volumes:
+      - "./worker:/code"
