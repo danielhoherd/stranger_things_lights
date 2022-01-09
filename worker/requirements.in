@@ -1,0 +1,4 @@
+adafruit-circuitpython-neopixel
+requests
+RPi.GPIO
+rpi_ws281x

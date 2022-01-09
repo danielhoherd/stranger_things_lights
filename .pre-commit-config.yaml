@@ -45,6 +45,8 @@ repos:
       - id: mixed-line-ending
         args: ["--fix=lf"]
       - id: requirements-txt-fixer
+        args: ["server/requirements.in", "server/requirements.txt", "worker/requirements.in", "worker/requirements.txt"]
+
       - id: sort-simple-yaml
       - id: trailing-whitespace
   - repo: https://github.com/adrienverge/yamllint.git
