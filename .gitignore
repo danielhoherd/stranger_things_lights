@@ -1,5 +1,5 @@
 **/DS_Store
-*.pyc
-**/environment.sh
 **/banned.txt
+**/environment.sh
 **/secret.yaml
+*.pyc

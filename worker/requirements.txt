@@ -1,3 +1,3 @@
+adafruit-circuitpython-neopixel
 requests
 rpi_ws281x
-adafruit-circuitpython-neopixel

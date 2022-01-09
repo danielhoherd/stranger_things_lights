@@ -1,22 +1,23 @@
+import logging
 import os
 import random
-import logging
 import time
-import requests
-import neopixel
+
 import board
+import neopixel
+import requests
 
 
-class UpsideDownDisplay():
+class UpsideDownDisplay:
     """Displays messages on LEDs from the upside down"""
 
     def __init__(self, num_leds=100):
         self.num_leds = num_leds
         self.char_limit = 15
         self.data_pin = board.D18
-        self.character_delay = 0.0 # how long to wait between characters
-        self.character_time = 1.0 # how long to display characters for
-        self.message_delay = 2.0 # how long to wait between messages
+        self.character_delay = 0.0  # how long to wait between characters
+        self.character_time = 1.0  # how long to display characters for
+        self.message_delay = 2.0  # how long to wait between messages
         self._setup_leds()
 
     def set_letter_mappings(self, letter_mappings):
@@ -30,26 +31,27 @@ class UpsideDownDisplay():
             self.num_leds,
             brightness=1,
             auto_write=False,
-            pixel_order=neopixel.RGB)
+            pixel_order=neopixel.RGB,
+        )
         self._twinkle_leds(25)
 
     def _get_server_host(self):
         """Fetch the hotsname of the server"""
-        return os.environ.get('SERVER_HOST', 'web')
+        return os.environ.get("SERVER_HOST", "web")
 
     def _get_server_key(self):
         """Fetch the API key for the server"""
-        return os.environ.get('SERVER_KEY', '')
+        return os.environ.get("SERVER_KEY", "")
 
     def _get_server_url(self):
         host = self._get_server_host()
         key = self._get_server_key()
-        return host + '/next?key=' + key
+        return host + "/next?key=" + key
 
     def _get_latest_message(self):
         try:
             server_url = self._get_server_url()
-            print(f'fetching {server_url}')
+            print(f"fetching {server_url}")
             response = requests.get(self._get_server_url())
             if response.status_code != 200:
                 return
@@ -74,7 +76,7 @@ class UpsideDownDisplay():
         self.leds[led_number] = [0, 0, 0]
         if update_now:
             self.leds.show()
-    
+
     def _clear_all_leds(self):
         self.leds.fill((0, 0, 0))
         self.leds.show()
@@ -82,13 +84,13 @@ class UpsideDownDisplay():
     def _get_colour_dict(self):
         """Returns a dict of standard colours"""
         return {
-            'red': (255, 0, 0),
-            'yellow': (255, 150, 0),
-            'green': (0, 255, 0),
-            'cyan': (0, 255, 255),
-            'blue': (0, 0, 255),
-            'purple': (180, 0, 255),
-            'white': (255, 255, 255),
+            "red": (255, 0, 0),
+            "yellow": (255, 150, 0),
+            "green": (0, 255, 0),
+            "cyan": (0, 255, 255),
+            "blue": (0, 0, 255),
+            "purple": (180, 0, 255),
+            "white": (255, 255, 255),
         }
 
     def _get_random_colour(self):
@@ -100,7 +102,9 @@ class UpsideDownDisplay():
         self.leds.fill([0, 0, 0])
         self.leds.show()
         for _ in range(0, num_times):
-            choices = [random.randint(0, self.num_leds - 1) for x in range(0, num_choices)]
+            choices = [
+                random.randint(0, self.num_leds - 1) for x in range(0, num_choices)
+            ]
             for i in choices:
                 self.leds[i] = [int(x * brightness) for x in self._get_random_colour()]
             self.leds.show()

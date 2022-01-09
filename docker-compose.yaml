@@ -6,8 +6,8 @@ services:
     build: .
     image: gcr.io/radical-sloth/stranger-things-lights
     environment:
-        - REDIS_HOST=redis
-        - SERVER_KEY=test
+      - REDIS_HOST=redis
+      - SERVER_KEY=test
     depends_on:
       - "redis"
     ports:
