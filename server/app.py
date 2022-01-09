@@ -45,9 +45,9 @@ def index():
         return render_template("index.html", **context)
 
 
-@app.route("/next/")
+@app.route("/next")
 def get_next_word():
-    if request.args.get("key") == os.environ.get("SERVER_KEY", "replace"):
+    if request.args.get("key") == os.environ.get("SERVER_KEY", ""):
         if redis_client.llen("word_list") > 0:
             word = redis_client.rpop("word_list")
             if word in banned_list:

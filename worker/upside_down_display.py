@@ -37,7 +37,7 @@ class UpsideDownDisplay:
 
     def _get_server_host(self):
         """Fetch the hotsname of the server"""
-        return os.environ.get("SERVER_HOST", "web")
+        return os.environ.get("SERVER_HOST", "server")
 
     def _get_server_key(self):
         """Fetch the API key for the server"""
@@ -46,7 +46,7 @@ class UpsideDownDisplay:
     def _get_server_url(self):
         host = self._get_server_host()
         key = self._get_server_key()
-        return host + "/next?key=" + key
+        return "http://" + host + "/next?key=" + key
 
     def _get_latest_message(self):
         try:
