@@ -10,7 +10,7 @@ This repo holds software for a project that is described in [a blog post about r
 - docker
 - docker-compose
 - ip version 4 networking
-- ws8211 programmable LEDs (neopixel)
+- ws2811 programmable LEDs (neopixel)
 
 This list may look daunting to newcomers, but don't worry, it's not as scary as it may look, and might just be an exciting introduction to technologies you can use far and wide!
 
