@@ -7,9 +7,20 @@ from flask import Flask, render_template, request
 redis_client = redis.StrictRedis(host=os.environ.get("REDIS_HOST"), port=6379, db=0)
 char_limit = 15
 
+if os.getenv("FLASK_ENV") == "development":
+
+    def debug_print(text):
+        print(text, flush=True)
+
+else:
+
+    def debug_print(text):
+        ...
+
 
 def get_banned_words(file_path="banned.txt"):
     """Returns the list of banned words"""
+    print("Running get_banned_words")
     if os.path.exists(file_path):
         with open(file_path) as file:
             lines = file.readlines()
@@ -19,6 +30,7 @@ def get_banned_words(file_path="banned.txt"):
 
 def schedule_word(req):
     """Schedules the word"""
+    print("Running schedule_word")
     word = req.values.get("word", "").replace(" ", "").lower()
     regex = re.compile("[^a-z]")
     word = regex.sub("", word)
@@ -47,13 +59,22 @@ def index():
 
 @app.route("/next")
 def get_next_word():
-    if request.args.get("key") == os.environ.get("SERVER_KEY", ""):
-        if redis_client.llen("word_list") > 0:
-            word = redis_client.rpop("word_list")
-            if word in banned_list:
-                return ""
-            return word
-    return ""
+    debug_print("Running get_next_word")
+    if not request.args.get("key") == os.environ.get("SERVER_KEY", ""):
+        print("Missing server key")
+        return ""
+
+    if redis_client.llen("word_list") == 0:
+        debug_print("No word list")
+        return ""
+
+    word = redis_client.rpop("word_list")
+    debug_print(f"{word=}")
+
+    if word in banned_list:
+        return ""
+
+    return word
 
 
 if __name__ == "__main__":

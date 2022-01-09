@@ -10,7 +10,7 @@ repos:
     rev: v2.31.0
     hooks:
       - id: pyupgrade
-        args: ["--py37-plus"]
+        args: ["--py39-plus"]
   - repo: https://github.com/pycqa/isort
     rev: 5.10.1
     hooks:
@@ -20,6 +20,7 @@ repos:
     rev: 21.12b0
     hooks:
       - id: black
+        args: ["--target-version", "py39"]
   - repo: https://github.com/PyCQA/flake8
     rev: 4.0.1
     hooks:

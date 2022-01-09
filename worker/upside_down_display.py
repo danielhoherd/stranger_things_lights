@@ -37,11 +37,11 @@ class UpsideDownDisplay:
 
     def _get_server_host(self):
         """Fetch the hotsname of the server"""
-        return os.environ.get("SERVER_HOST", "server")
+        return os.getenv("SERVER_HOST", "server")
 
     def _get_server_key(self):
         """Fetch the API key for the server"""
-        return os.environ.get("SERVER_KEY", "")
+        return os.getenv("SERVER_KEY", "")
 
     def _get_server_url(self):
         host = self._get_server_host()
@@ -49,15 +49,21 @@ class UpsideDownDisplay:
         return "http://" + host + "/next?key=" + key
 
     def _get_latest_message(self):
+        print("running _get_latest_message")
         try:
             server_url = self._get_server_url()
             print(f"fetching {server_url}")
             response = requests.get(self._get_server_url())
             if response.status_code != 200:
+                print(f"{response.status_code=}")
                 return
             if not response.text:
+                print(f"{response.status_code=} with no text")
                 return
             if len(response.text) > self.char_limit:
+                print(
+                    f"{response.status_code=} {response.text} exceeded allowed length of {self.char_limit}"
+                )
                 return
             print(response.text)
         except Exception as e:
@@ -116,6 +122,7 @@ class UpsideDownDisplay:
 
     def _display_character(self, character):
         """Flash a character on the LEDs"""
+        print(f"running _display_character: {character}", flush=True)
         led_number = self.letter_mappings.get(str(character).lower())
         if not led_number:
             time.sleep(self.character_time)
@@ -128,6 +135,7 @@ class UpsideDownDisplay:
 
     def _display_message(self, message):
         """Displays the message on the LEDs"""
+        print(f"running _display_message: {message}", flush=True)
         self._twinkle_leds()
         for character in message:
             self._display_character(character)
