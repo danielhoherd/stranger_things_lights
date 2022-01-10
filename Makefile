@@ -6,10 +6,6 @@ build:
 run:
 	docker-compose up
 
-.PHONY: install-pi
-install-pi:
-	cd scripts && bash install_raspberry_pi.sh
-
 .PHONY: run-worker
 run-worker:
 	docker-compose up -d worker
