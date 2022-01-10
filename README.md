@@ -1,6 +1,8 @@
 # Stranger Things Lights
 
-This repo holds software for a project that is described in [a blog post about recreating a famous scene from Stranger Things](https://www.tomshardware.com/how-to/stranger-things-lights-raspberry-pi). This project makes use of the following technologies:
+This repo holds software for a project that is described in [a blog post about recreating a famous scene from Stranger Things](https://www.tomshardware.com/how-to/stranger-things-lights-raspberry-pi). This fork of [the original repo](https://github.com/rydercalmdown/stranger_things_lights) builds on the original but aims to make it more approachable for people who are not linux or code experts.
+
+This project makes use of the following technologies:
 
 - raspberry pi OS
 - the linux terminal (bash)
@@ -43,6 +45,10 @@ Complete all the hardware steps shown in [the original blog post](https://www.to
 
 ## TODO
 
+- Support spaces and phrases and longer input.
 - Improve this experience of mapping the letters to numbers. Try to make it so the server doesn't have to restart, because that takes a long time and requires juggling terminals.
 - Figure out why non-alpha characters are not working.
 - Find a way to synchronize prefs across both components. EG: `char_limit` has to be edited in both places, and if we could reduce that to one place that would be better.
+- Make a more aesthetically pleasing color picker: don't select the same color twice in a row, don't select multiple white-ish colors in a row, etc..
+- Have a daydream feature where when no input has happened for a period of time, the lights do slow animations.
+- Make a version of this that runs on an esp8266, or perhaps put just the worker on the esp8266 with a generic ws2811 web api.
