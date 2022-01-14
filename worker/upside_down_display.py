@@ -87,8 +87,8 @@ class UpsideDownDisplay:
         self.leds.fill((0, 0, 0))
         self.leds.show()
 
-    def _get_colour_dict(self):
-        """Returns a dict of standard colours"""
+    def _get_color_dict(self):
+        """Returns a dict of standard colors"""
         return {
             "red": (255, 0, 0),
             "yellow": (255, 150, 0),
@@ -99,9 +99,9 @@ class UpsideDownDisplay:
             "white": (255, 255, 255),
         }
 
-    def _get_random_colour(self):
-        """Returns a random colour from a predefined dict"""
-        return random.choice(list(self._get_colour_dict().items()))[1]
+    def _get_random_color(self):
+        """Returns a random color from a predefined dict"""
+        return random.choice(list(self._get_color_dict().items()))[1]
 
     def _twinkle_leds(self, num_times=10, delay=0.1, num_choices=10, brightness=0.8):
         """Twinkle the LEDs to catch attention"""
@@ -112,7 +112,7 @@ class UpsideDownDisplay:
                 random.randint(0, self.num_leds - 1) for x in range(0, num_choices)
             ]
             for i in choices:
-                self.leds[i] = [int(x * brightness) for x in self._get_random_colour()]
+                self.leds[i] = [int(x * brightness) for x in self._get_random_color()]
             self.leds.show()
             time.sleep(delay)
             for i in choices:
@@ -128,7 +128,7 @@ class UpsideDownDisplay:
             time.sleep(self.character_time)
             time.sleep(self.character_delay)
             return
-        self._set_led(led_number, self._get_random_colour())
+        self._set_led(led_number, self._get_random_color())
         time.sleep(self.character_time)
         self._clear_led(led_number)
         time.sleep(self.character_delay)
